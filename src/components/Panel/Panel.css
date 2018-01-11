@@ -1,0 +1,13 @@
+.loginScreen {
+    font-family: 'Cairo', sans-serif;
+    margin-top: 200px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.btn {
+    background-color: #8c92ac;
+    color: #ffffff;
+}
