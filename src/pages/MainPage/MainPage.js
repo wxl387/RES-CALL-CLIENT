@@ -5,9 +5,9 @@ class HomePage extends Component {
     render() {
         return (
             <div>
-                <p>
+                <a href="https://res-call-main.herokuapp.com/">
                     Welcome!
-                </p>
+                </a>
             </div>
         );
     }

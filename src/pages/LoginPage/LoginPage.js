@@ -2,24 +2,13 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { Panel, PanelHeading, PanelBody, PanelBtn } from "../../components/Panel";
 
-// import {
-//     BrowserRouter as Router,
-//     Route,
-//     Link,
-//     Redirect,
-//     withRouter
-//   } from 'react-router-dom';
-// import MainPage from "../MainPage";
-
-
-
 class LoginPage extends Component {
     state = {
         username: "",
         password: "",
-        validation: "bad",
-    };
+        validation: ""
 
+    };
 
     checkUser = () => {
         API.checkpwd(
@@ -29,10 +18,7 @@ class LoginPage extends Component {
             }
         )
             .then(res => {
-                // console.log("loginPage");
-                // console.log(res.data);
                 this.setState({ validation: res.data });
-                // console.log(this.state.validation);
                 this.setState({ username: "", password: "" });
                 this.checkLogin();
             }
@@ -40,15 +26,13 @@ class LoginPage extends Component {
             .catch(err => console.log(err));
     };
 
-
-
     checkLogin = () => {
         console.log(this.state.validation);
         if (this.state.validation === "login successfully") {
             console.log("go to next page");
             this.goToNextPage();
         } else {
-            console.log("fix problems");
+            console.log(this.state.validation);
         }
     };
 
@@ -75,59 +59,31 @@ class LoginPage extends Component {
     render() {
         return (
             <div>
-                <form>
-                    <p>Username: {this.state.username}</p>
-                    <p>{this.state.validation}</p>
-
-                    <input
+                <Panel>
+                    <PanelHeading />
+                    <PanelBody
                         type="text"
-                        placeholder="abc123"
+                        placeholder="username"
                         name="username"
                         value={this.state.username}
                         onChange={this.handleInputChange}
                     />
-
-                    <p>Password: {this.state.password}</p>
-
-                    <input
+                    <PanelBody
                         type="password"
-                        placeholder="Abc12#"
+                        placeholder="password"
                         name="password"
                         value={this.state.password}
                         onChange={this.handleInputChange}
                     />
+                    <p>{this.state.validation}</p>
+                    <br />
+                    <PanelBtn
+                        disabled={!(this.state.username && this.state.password)}
+                        onClick={this.handleFormSubmit}
+                    >Log in </PanelBtn>
+                    <a href="/RegisterPage">Register</a>
 
-                    <hr />
-
-                    <button onClick={this.handleFormSubmit}>Login</button>
-
-                </form>
-
-                <div>
-
-                    <Panel>
-                        <PanelHeading />
-                        <PanelBody
-                            type="text"
-                            placeholder="abc123"
-                            name="username"
-                            value={this.state.username}
-                            onChange={this.handleInputChange}
-                        />
-                        <PanelBody
-                            type="password"
-                            placeholder="Abc12#"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.handleInputChange}
-                        />
-
-                        <PanelBtn
-                            disabled={!(this.state.username && this.state.password)}
-                            onClick={this.handleFormSubmit}
-                        >Log in </PanelBtn>
-                    </Panel>
-                </div>
+                </Panel>
             </div>
         );
     }

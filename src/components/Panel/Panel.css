@@ -8,6 +8,9 @@ img {
 }
 
 .btn {
+    margin-inline-start: 10%;
+    margin-right: 10%; 
+    text-align: center;
     background-color: #8c92ac;
     color: #ffffff;
 }

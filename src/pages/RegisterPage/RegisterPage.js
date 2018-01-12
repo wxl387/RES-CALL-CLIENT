@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { Panel, PanelHeading, PanelBody, PanelBtn } from "../../components/Panel";
 
-
 class RegisterPage extends Component {
     state = {
         username: "",
@@ -10,7 +9,6 @@ class RegisterPage extends Component {
         validation: "",
         isValidUsername: false,
         isValidPassword: false
-
     };
 
     addUser = () => {
@@ -21,8 +19,6 @@ class RegisterPage extends Component {
             }
         )
             .then(res => {
-                console.log("registerPage");
-                console.log(res.data);
                 this.setState({ validation: res.data });
                 this.setState({ username: "", password: "" });
                 this.checkRegistration();
@@ -35,7 +31,7 @@ class RegisterPage extends Component {
         if (this.state.validation === "Username has been added") {
             this.goToNextPage();
         } else {
-            
+
             console.log("error on adding new user");
         }
     };
@@ -48,85 +44,25 @@ class RegisterPage extends Component {
     handleUserNameChange = event => {
         const { name, value } = event.target;
 
-        console.log("name", name);
-        console.log("value", value);
-        console.log("value.length", value.length);
-        console.log("value type", typeof value);
         const isValid = value.length > 5
         this.setState({
             [name]: value
         });
-
-        
-        console.log("isValid", isValid);
-        this.setState({isValidUsername: isValid});
+        this.setState({ isValidUsername: isValid });
     };
 
     handlePWDChange = event => {
         const { name, value } = event.target;
 
-        console.log("name", name);
-        console.log("value", value);
-        console.log("value.length", value.length);
-
         this.setState({
             [name]: value
         });
 
         const isValid = value.length > 5
-        
+
         console.log("isValid", isValid);
-        this.setState({isValidPassword : isValid});
-
-        
-
+        this.setState({ isValidPassword: isValid });
     };
-
-    // handleInputChange = event => {
-    //     const { name, value } = event.target;
-
-    //     this.setState({
-    //         [name]: value
-    //     });
-
-        // if (value.length >= 5) {
-        //     this.setState({ validation: "good" });
-        // }
-        // else {
-        //     this.setState({ validation: "bad" });
-        // };
-
-        // console.log("event.name", name);
-        // console.log("event.value", value);
-        // //this.checkInput();
-        // console.log("username", this.state.username);
-        // console.log("password", this.state.password);
-
-    //     const isValid = this.state.username.length > 5
-    //         && this.state.password.length > 5;
-        
-    //     this.setState({isValid: isValid});
-
-    //     console.log("isValid", this.state.isValid);
-    // };
-
-    // checkInput = () => {
-        // if (this.state.username.length>=5 && this.state.password.length >= 5) {
-        //     this.setState({validation: "good"});
-        // } else {
-        //     this.setState({validation: "bad"});
-        // };
-        // console.log("username", this.state.username);
-        // console.log("password", this.state.password);
-
-        // const isValid = this.state.username.length > 5
-            // && this.state.password.length > 5;
-        
-        // this.setState({isValid: isValid});
-
-    //     console.log("isValid", this.state.isValid);
-
-    // };
 
     handleFormSubmit = event => {
         event.preventDefault();
@@ -137,61 +73,29 @@ class RegisterPage extends Component {
     render() {
         return (
             <div>
-                {/* <form>
-                    <p>Username: {this.state.username}</p>
-                    <p>{this.state.validation}</p>
-
-                    <div>
-                        {this.state.message}
-                    </div>
-                    <input
+                <Panel>
+                    <PanelHeading />
+                    <PanelBody
                         type="text"
-                        placeholder="abc123"
+                        placeholder="abc123(at least 6)"
                         name="username"
                         value={this.state.username}
-                        onChange={this.handleInputChange}
+                        onChange={this.handleUserNameChange}
                     />
-
-                    <p>Password: {this.state.password}</p>
-
-                    <input
+                    <PanelBody
                         type="password"
-                        placeholder="Abc12#"
+                        placeholder="Abc12#(at least 6)"
                         name="password"
                         value={this.state.password}
-                        onChange={this.handleInputChange}
+                        onChange={this.handlePWDChange}
                     />
 
-                    <hr />
-
-                    <button onClick={this.handleFormSubmit}>Register</button>
-                </form> */}
-
-                <div>
-
-                    <Panel>
-                        <PanelHeading />
-                        <PanelBody
-                            type="text"
-                            placeholder="abc123"
-                            name="username"
-                            value={this.state.username}
-                            onChange={this.handleUserNameChange}
-                        />
-                        <PanelBody
-                            type="password"
-                            placeholder="Abc12#"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.handlePWDChange}
-                        />
-
-                        <PanelBtn
-                            disabled={!(this.state.isValidUsername && this.state.isValidPassword)}
-                            onClick={this.handleFormSubmit}
-                        >Register </PanelBtn>
-                    </Panel>
-                </div>
+                    <PanelBtn
+                        disabled={!(this.state.isValidUsername && this.state.isValidPassword)}
+                        onClick={this.handleFormSubmit}
+                    >Register </PanelBtn>
+                    <a href="/LoginPage">Log in</a>
+                </Panel>
             </div>
         );
     }
