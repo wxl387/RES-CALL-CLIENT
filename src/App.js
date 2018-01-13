@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage";
-import HomePage from "./pages/HomePage";
+// import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-// import MainPage from "./pages/MainPage";
+import MainPage from "./pages/MainPage";
 
 const App = () =>
   <Router>
